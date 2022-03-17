@@ -3,40 +3,61 @@
 
 ## Tools Installation
 
+
+## Prokka
 ```
-## Prokka Installation
-conda install -c conda-forge -c bioconda prokka
+(1) easy installation
+conda create -n prokka_env -c conda-forge -c bioconda prokka
+conda activate prokka_env
+
+(2) install in current env: need debug
+conda install -c conda-forge -c bioconda prokka 
+conda env config vars set PERL5LIB=$CONDA_PREFIX/lib/perl5/site_perl/5.22.0/ -n base
 prokka --setupdb
+		cd $CONDA_PREFIX/bin
+		nano prokka
+		# now within nano
+		^W # search for this text GETVER  => "blastp -version",
+		# Change MINVER  => "2.2" to MINVER  => "2.1"
+		# A few lines down is the option for makeblastdb, do the same change you did for blastp:
+		# Change MINVER  => "2.2" to MINVER  => "2.1"
 ```
+
+## Prodigal
 ```
-## Prodigal Installation
 conda install -c conda-forge -c bioconda prodigal
 prokka --setupdb
 ```
+
+## GeneMarkS
 ```
-## GeneMarkS Installation
 wget http://topaz.gatech.edu/GeneMark/tmp/GMtool_fhCZT/gms2_linux_64.tar.gz
 cp  gmhmmp2_key   ~/.gmhmmp2_key
 ```
+
+## Glimmer
 ```
-## Glimmer Installation
 conda install -c bioconda glimmer
 ```
+
+## Balrog
 ```
-## Balrog Installation
 conda create -n balrog_env python=3.7
 conda activate balrog_env
 conda install -c conda-forge -c bioconda balrog mmseqs2
 conda install -c pytorch pytorch torchvision torchaudio cpuonly
 ```
+
+## MetaGeneAnnotator
 ```
-## MetaGeneAnnotator Installation
 wget metagene.nig.ac.jp/metagene/mga_x86_64.tar.gz
 tar xzf mga_x86_64.tar.gz
 ```
 ## Prediction 
 ## with Prokka
 The command used was
+
+
 ```
 prokka <assembly.fasta> --outdir <output/path/> --kingdom Bacteria --rfam
 ```
